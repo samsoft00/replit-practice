@@ -1,6 +1,5 @@
 package topmovies
 
-import "fmt"
 
 // list1 := []*LinkedListNode{}
 func merge2SortedLists(l1, l2 *LinkedListNode) *LinkedListNode {
