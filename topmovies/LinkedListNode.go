@@ -2,7 +2,7 @@ package topmovies
 
 import (
 	"fmt"
-	"rand"
+	"math/rand"
 )
 
 type LinkedListNode struct {
@@ -12,7 +12,7 @@ type LinkedListNode struct {
   arbitrartPointer  *LinkedListNode
 }
 
-func createLinkedList(lst []int) *LinkedListNode {
+func CreateLinkedList(lst []int) *LinkedListNode {
   var head *LinkedListNode
   var tail *LinkedListNode
 
@@ -67,20 +67,56 @@ func toList(head *LinkedListNode) []int {
   return lst
 }
 
-func display(head *LinkedListNode) {
+func Display(head *LinkedListNode) {
   temp := head
   for temp != nil {
-    fmt.Println("%d", temp.data)
+    fmt.Printf("%d", temp.data)
     temp = temp.next
     if temp != nil {
       fmt.Println(", ")
     }
   }
-  fmt.Println("\n")
+  fmt.Printf("\n")
 }
 
 func mergeAlternating(list1, list2 *LinkedListNode) *LinkedListNode {
-  
+  if list1 == nil {
+    return list2
+  }
+
+  if list2 == nil {
+    return list1
+  }
+
+  head := list1
+  for list1.next != nil && list2 != nil {
+    temp := list2
+    list2 = list2.next
+
+    temp.next = list1.next
+    list1.next = temp
+    list1 = temp.next
+  }
+
+  if list1.next == nil {
+    list1.next = list2
+  }
+
+  return head
 }
 
-func isEqual(list1, list2 *LinkedListNode) bool {}
+func isEqual(list1, list2 *LinkedListNode) bool {
+  if list1 == list2 {
+    return true
+  }
+
+  for list1 != nil && list2 != nil {
+    if list1.data != list2.data {
+      return false
+    }
+
+    list1 = list1.next
+    list2 = list2.next
+  }
+  return (list1 == list2)
+}
